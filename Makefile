@@ -14,7 +14,7 @@ $(GENERATED)$(FILE).json: $(SRC)
 
 # Place and Route
 $(GENERATED)$(FILE)_pnr.json: $(GENERATED)$(FILE).json
-	nextpnr-himbaechel --json $(GENERATED)$(FILE).json --freq 27 --write $(GENERATED)$(FILE)_pnr.json --device ${DEVICE} --vopt cst=$(ROOT)/${FILE}.cst --vopt family=${FAMILY}
+	nextpnr-himbaechel --json $(GENERATED)$(FILE).json --freq 27 --write $(GENERATED)$(FILE)_pnr.json --device ${DEVICE} --vopt cst=$(ROOT)/$(FILE).cst --vopt family=$(FAMILY)
 
 # Generate Bitstream
 $(GENERATED)$(FILE).fs: $(GENERATED)$(FILE)_pnr.json
