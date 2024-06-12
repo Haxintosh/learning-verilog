@@ -1,10 +1,12 @@
 module top
 (
     input clk,
+    input btn1,
+    input btn2,
     output [5:0] led
 );
 
-localparam WAIT_TIME = 13500000;
+reg [24:0] WAIT_TIME = 2000000;
 reg [5:0] ledCounter = 1;
 reg [23:0] clockCounter = 0;
 reg ledDir = 0;
@@ -31,5 +33,10 @@ always @(posedge clk) begin
         end
     end
 end
+
+always @(posedge btn1) begin
+    WAIT_TIME <= WAIT_TIME/2;
+end
+
 assign led = ~ledCounter;
 endmodule
