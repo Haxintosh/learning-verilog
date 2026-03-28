@@ -1,38 +1,56 @@
 BOARD=tangnano9k
 FAMILY=GW1N-9C
 DEVICE=GW1NR-LV9QN88PC6/I5
-FILE=xyz 
-TOP=xyz 
-ROOT = $(shell pwd)
-GENERATED = $(ROOT)/generated/
-SRC=$(ROOT)/$(FILE).v
 
-all: $(GENERATED)$(FILE).fs
+FILE=xyz
+TOP=xyz
+
+MODULE_DIR = $(patsubst %/,%,$(dir $(FILE)))
+
+BASENAME = $(notdir $(FILE))
+
+ROOT = $(shell pwd)/$(MODULE_DIR)
+
+GENERATED = $(ROOT)/generated/
+
+
+ifneq ($(filter %_top,$(BASENAME)),)
+   SRC = $(filter-out %_tb.v, $(wildcard $(ROOT)/*.v))
+else
+    SRC = $(ROOT)/$(BASENAME).v
+endif
+
+all: $(GENERATED)$(BASENAME).fs
+
 # Synthesis
-$(GENERATED)$(FILE).json: $(SRC)
-	yosys -p "read_verilog $(SRC); synth_gowin -top $(TOP) -json $(GENERATED)$(FILE).json"
+$(GENERATED)$(BASENAME).json: $(SRC)
+	mkdir -p $(GENERATED)
+	yosys -p "read_verilog $(SRC); synth_gowin -top $(TOP) -json $(GENERATED)$(BASENAME).json"
 
 # Place and Route
-$(GENERATED)$(FILE)_pnr.json: $(GENERATED)$(FILE).json
-	nextpnr-himbaechel --json $(GENERATED)$(FILE).json --freq 27 --write $(GENERATED)$(FILE)_pnr.json --device ${DEVICE} --vopt cst=$(ROOT)/$(FILE).cst --vopt family=$(FAMILY)
+$(GENERATED)$(BASENAME)_pnr.json: $(GENERATED)$(BASENAME).json
+	nextpnr-himbaechel --json $(GENERATED)$(BASENAME).json --freq 27 --write $(GENERATED)$(BASENAME)_pnr.json --device ${DEVICE} --vopt cst=$(ROOT)/$(BASENAME).cst --vopt family=$(FAMILY)
 
 # Generate Bitstream
-$(GENERATED)$(FILE).fs: $(GENERATED)$(FILE)_pnr.json
-	gowin_pack -d ${FAMILY} -o $(GENERATED)$(FILE).fs $(GENERATED)$(FILE)_pnr.json
+$(GENERATED)$(BASENAME).fs: $(GENERATED)$(BASENAME)_pnr.json
+	gowin_pack -d ${FAMILY} -o $(GENERATED)$(BASENAME).fs $(GENERATED)$(BASENAME)_pnr.json
 
 # Program Board
-load: $(GENERATED)$(FILE).fs
-	openFPGALoader -b ${BOARD} $(GENERATED)$(FILE).fs -f
+load: $(GENERATED)$(BASENAME).fs
+	openFPGALoader -b ${BOARD} $(GENERATED)$(BASENAME).fs -f
 
-$(GENERATED)$(FILE)_test.o: $(SRC) $(ROOT)/$(FILE)_tb.v
-	iverilog -o $(GENERATED)$(FILE)_test.o -s test $(SRC) $(ROOT)/$(FILE)_tb.v
+# Simulation Object
+$(GENERATED)$(BASENAME)_test.o: $(SRC) $(ROOT)/$(BASENAME)_tb.v
+	mkdir -p $(GENERATED)
+	iverilog -o $(GENERATED)$(BASENAME)_test.o -s test $(SRC) $(ROOT)/$(BASENAME)_tb.v
 
-test: $(GENERATED)$(FILE)_test.o
-	vvp $(GENERATED)$(FILE)_test.o
+# Run Test
+test: $(GENERATED)$(BASENAME)_test.o
+	vvp $(GENERATED)$(BASENAME)_test.o
 
 # Wipe
 clean:
-	rm -f $(GENERATED)$(FILE).vcd $(GENERATED)$(FILE).fs $(GENERATED)$(FILE)_test.o $(GENERATED)$(FILE).json $(GENERATED)$(FILE)_pnr.json
+	rm -f $(GENERATED)$(BASENAME).vcd $(GENERATED)$(BASENAME).fs $(GENERATED)$(BASENAME)_test.o $(GENERATED)$(BASENAME).json $(GENERATED)$(BASENAME)_pnr.json
 
-.PHONY: load clean test
-.INTERMEDIATE: $(GENERATED)$(FILE)_pnr.json $(GENERATED)$(FILE).json $(GENERATED)$(FILE)_test.o
+.PHONY: load clean test all
+.INTERMEDIATE: $(GENERATED)$(BASENAME)_pnr.json $(GENERATED)$(BASENAME).json $(GENERATED)$(BASENAME)_test.o

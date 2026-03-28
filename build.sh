@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# use the makefile instead
 TOP=""
 file=""
 debug=false
@@ -33,11 +33,11 @@ fi
 
 command="make TOP=\"$TOP\" FILE=\"$file\""
 
-if $debug; 
+if $debug;
 then
     command+=" test"
 else
     command+=" load"
 fi
 
-eval "$command" 
+eval "$command"
