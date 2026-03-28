@@ -24,7 +24,7 @@
     autoload_sibling_state_files: None,
     autoreload_files: None,
     waves: Some((
-        source: File("\\\\wsl.localhost\\Ubuntu\\home\\haxin\\Coding\\verilog\\learning-verilog\\uart.vcd"),
+        source: File("\\\\wsl.localhost\\Ubuntu\\home\\haxin\\Coding\\verilog\\learning-verilog\\uart\\uart.vcd"),
         format: Vcd,
         active_scope: Some(WaveScope((
             strs: [
@@ -129,7 +129,7 @@
                     item_ref: (20),
                     level: 0,
                     unfolded: true,
-                    selected: true,
+                    selected: false,
                 ),
                 (
                     item_ref: (27),
@@ -158,109 +158,6 @@
             ],
         ),
         displayed_items: {
-            (28): Marker((
-                color: None,
-                background_color: None,
-                name: None,
-                idx: 5,
-            )),
-            (11): Divider((
-                color: None,
-                background_color: None,
-                name: None,
-            )),
-            (1): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "test",
-                            "u",
-                        ],
-                        id: Wellen((3)),
-                    ),
-                    name: "uartRx",
-                    id: Wellen((9)),
-                    index: None,
-                ),
-                color: Some("Green"),
-                background_color: None,
-                display_name: "uartRx",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-                analog: None,
-            )),
-            (20): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "test",
-                            "u",
-                        ],
-                        id: Wellen((3)),
-                    ),
-                    name: "txDataReady",
-                    id: Wellen((38)),
-                    index: None,
-                ),
-                color: None,
-                background_color: None,
-                display_name: "txDataReady",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-                analog: None,
-            )),
-            (29): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "test",
-                            "u",
-                        ],
-                        id: Wellen((3)),
-                    ),
-                    name: "uartTx",
-                    id: Wellen((41)),
-                    index: None,
-                ),
-                color: Some("Yellow"),
-                background_color: None,
-                display_name: "uartTx",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-                analog: None,
-            )),
-            (30): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "test",
-                            "u",
-                        ],
-                        id: Wellen((3)),
-                    ),
-                    name: "txCounter",
-                    id: Wellen((36)),
-                    index: None,
-                ),
-                color: None,
-                background_color: None,
-                display_name: "txCounter [12:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-                analog: None,
-            )),
             (8): Variable((
                 variable_ref: (
                     path: (
@@ -284,81 +181,6 @@
                 height_scaling_factor: None,
                 analog: None,
             )),
-            (18): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "test",
-                            "u",
-                        ],
-                        id: Wellen((3)),
-                    ),
-                    name: "txState",
-                    id: Wellen((40)),
-                    index: None,
-                ),
-                color: None,
-                background_color: None,
-                display_name: "txState [3:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-                analog: None,
-            )),
-            (7): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "test",
-                            "u",
-                        ],
-                        id: Wellen((3)),
-                    ),
-                    name: "rxState",
-                    id: Wellen((33)),
-                    index: None,
-                ),
-                color: None,
-                background_color: None,
-                display_name: "rxState [3:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-                analog: None,
-            )),
-            (5): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "test",
-                            "u",
-                        ],
-                        id: Wellen((3)),
-                    ),
-                    name: "byteReady",
-                    id: Wellen((26)),
-                    index: None,
-                ),
-                color: None,
-                background_color: None,
-                display_name: "byteReady",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-                analog: None,
-            )),
-            (24): Marker((
-                color: None,
-                background_color: None,
-                name: None,
-                idx: 4,
-            )),
             (9): Variable((
                 variable_ref: (
                     path: (
@@ -381,41 +203,6 @@
                 field_formats: [],
                 height_scaling_factor: Some(1.0),
                 analog: None,
-            )),
-            (3): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "test",
-                            "u",
-                        ],
-                        id: Wellen((3)),
-                    ),
-                    name: "data",
-                    id: Wellen((27)),
-                    index: None,
-                ),
-                color: Some("Pink"),
-                background_color: None,
-                display_name: "data [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: Some("Binary"),
-                field_formats: [],
-                height_scaling_factor: None,
-                analog: None,
-            )),
-            (27): Marker((
-                color: None,
-                background_color: None,
-                name: None,
-                idx: 3,
-            )),
-            (31): Marker((
-                color: None,
-                background_color: None,
-                name: None,
-                idx: 1,
             )),
             (32): Variable((
                 variable_ref: (
@@ -463,6 +250,104 @@
                 height_scaling_factor: None,
                 analog: None,
             )),
+            (30): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "test",
+                            "u",
+                        ],
+                        id: Wellen((3)),
+                    ),
+                    name: "txCounter",
+                    id: Wellen((36)),
+                    index: None,
+                ),
+                color: None,
+                background_color: None,
+                display_name: "txCounter [12:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+                analog: None,
+            )),
+            (26): Marker((
+                color: None,
+                background_color: None,
+                name: None,
+                idx: 2,
+            )),
+            (20): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "test",
+                            "u",
+                        ],
+                        id: Wellen((3)),
+                    ),
+                    name: "txDataReady",
+                    id: Wellen((38)),
+                    index: None,
+                ),
+                color: None,
+                background_color: None,
+                display_name: "txDataReady",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+                analog: None,
+            )),
+            (7): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "test",
+                            "u",
+                        ],
+                        id: Wellen((3)),
+                    ),
+                    name: "rxState",
+                    id: Wellen((33)),
+                    index: None,
+                ),
+                color: None,
+                background_color: None,
+                display_name: "rxState [3:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+                analog: None,
+            )),
+            (3): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "test",
+                            "u",
+                        ],
+                        id: Wellen((3)),
+                    ),
+                    name: "data",
+                    id: Wellen((27)),
+                    index: None,
+                ),
+                color: Some("Pink"),
+                background_color: None,
+                display_name: "data [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: Some("Binary"),
+                field_formats: [],
+                height_scaling_factor: None,
+                analog: None,
+            )),
             (16): Variable((
                 variable_ref: (
                     path: (
@@ -486,11 +371,74 @@
                 height_scaling_factor: None,
                 analog: None,
             )),
-            (26): Marker((
+            (28): Marker((
                 color: None,
                 background_color: None,
                 name: None,
-                idx: 2,
+                idx: 5,
+            )),
+            (5): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "test",
+                            "u",
+                        ],
+                        id: Wellen((3)),
+                    ),
+                    name: "byteReady",
+                    id: Wellen((26)),
+                    index: None,
+                ),
+                color: None,
+                background_color: None,
+                display_name: "byteReady",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+                analog: None,
+            )),
+            (31): Marker((
+                color: None,
+                background_color: None,
+                name: None,
+                idx: 1,
+            )),
+            (24): Marker((
+                color: None,
+                background_color: None,
+                name: None,
+                idx: 4,
+            )),
+            (11): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (18): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "test",
+                            "u",
+                        ],
+                        id: Wellen((3)),
+                    ),
+                    name: "txState",
+                    id: Wellen((40)),
+                    index: None,
+                ),
+                color: None,
+                background_color: None,
+                display_name: "txState [3:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+                analog: None,
             )),
             (23): Marker((
                 color: None,
@@ -498,12 +446,64 @@
                 name: None,
                 idx: 0,
             )),
+            (29): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "test",
+                            "u",
+                        ],
+                        id: Wellen((3)),
+                    ),
+                    name: "uartTx",
+                    id: Wellen((41)),
+                    index: None,
+                ),
+                color: Some("Yellow"),
+                background_color: None,
+                display_name: "uartTx",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+                analog: None,
+            )),
+            (27): Marker((
+                color: None,
+                background_color: None,
+                name: None,
+                idx: 3,
+            )),
+            (1): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "test",
+                            "u",
+                        ],
+                        id: Wellen((3)),
+                    ),
+                    name: "uartRx",
+                    id: Wellen((9)),
+                    index: None,
+                ),
+                color: Some("Green"),
+                background_color: None,
+                display_name: "uartRx",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+                analog: None,
+            )),
         },
         display_item_ref_counter: 32,
         viewports: [
             (
-                curr_left: (-0.27999999999999997),
-                curr_right: (1.1199999999999997),
+                curr_left: (0.005810319017252192),
+                curr_right: (0.9442583181152789),
                 target_left: (0.8228077755349619),
                 target_right: (0.9175194109004773),
                 move_start_left: (0.8228077755349619),
@@ -513,20 +513,20 @@
             ),
         ],
         cursor: Some((1, [
-            568,
+            153,
         ])),
         markers: {
             5: (1, [
                 1367,
-            ]),
-            0: (1, [
-                20,
             ]),
             1: (1, [
                 1479,
             ]),
             2: (1, [
                 1351,
+            ]),
+            0: (1, [
+                20,
             ]),
             3: (1, [
                 1335,
@@ -544,10 +544,7 @@
     )),
     drag_started: false,
     drag_source_idx: None,
-    drag_target_idx: Some((
-        before: (10),
-        level: 0,
-    )),
+    drag_target_idx: None,
     previous_waves: None,
     count: None,
     blacklisted_translators: [],

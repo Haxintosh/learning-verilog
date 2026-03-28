@@ -5,41 +5,72 @@ module uart_top
     parameter CYCLES_PER_BIT = 234
 )
 (
-    input  wire clk,
-
-    input  wire uartRx,
+    // hardaware io
+    input wire clk,
+    input wire uartRx,
     output wire uartTx,
-    output reg  [5:0] led,
-
-    output wire [7:0] rx_data_out,
-    output wire       rx_data_ready,
-    input  wire [7:0] tx_data_in,
-    input  wire       tx_start,
-    output wire       tx_done
+    output reg [5:0] led
 );
 
-    wire rx_is_good;
+// rx
+wire [7:0] uart_rx_in; // DRIVEN BY SUBMODULES
+wire rx_data_ready;
+wire rx_data_good;
 
-    uart_rx #( .CYCLES_PER_BIT(CYCLES_PER_BIT) ) my_rx (
-        .clk(clk),
-        .rx_pin(uartRx),
-        .rx_data_out(rx_data_out),
-        .rx_data_ready(rx_data_ready),
-        .rx_data_good(rx_is_good)
-    );
+// tx
+reg [7:0] uart_tx_out; // reg since driven by this
+reg tx_start;
+wire tx_done;
 
-    uart_tx #( .CYCLES_PER_BIT(CYCLES_PER_BIT) ) my_tx (
-        .clk(clk),
-        .tx_start(tx_start),
-        .tx_data_in(tx_data_in),
-        .tx_pin(uartTx),
-        .tx_byte_done(tx_done)
-    );
+reg [3:0] state = 0;
 
-    always @(posedge clk) begin
-        if (rx_data_ready && rx_is_good) begin
-            led <= ~rx_data_out[5:0];
+uart_tx #(
+    .CYCLES_PER_BIT(234)
+) uart_tx_inst (
+    .clk(clk),
+    .tx_start(tx_start),
+    .tx_data_in(uart_tx_out),
+    .tx_pin(uartTx),
+    .tx_byte_done(tx_done)
+);
+
+uart_rx #(
+    .CYCLES_PER_BIT(234)
+) uart_rx_inst (
+    .clk(clk),
+    .rx_data_out(uart_rx_in),
+    .rx_pin(uartRx),
+    .rx_data_ready(rx_data_ready),
+    .rx_data_good(rx_data_good)
+);
+
+
+// fsm
+
+localparam IDLE  = 0;
+localparam START = 1;
+localparam WAIT  = 2;
+
+
+always @(posedge clk) begin
+    case (state)
+        IDLE: begin
+            // if we have data form rx to send back
+            if (rx_data_ready) begin
+                uart_tx_out <= uart_rx_in;
+                tx_start<=1;
+                state<= START;
+            end
         end
-    end
-
+        START: begin
+            tx_start <=0; // only pull it high for 1 cycle
+            state <= WAIT;
+        end
+        WAIT: begin
+            if (tx_done && ~rx_data_ready) begin // wait until next data rdy event
+                state <= IDLE;
+            end
+        end
+    endcase
+end
 endmodule
